@@ -1,0 +1,111 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-membership-heading" data-cy="MembershipCreateUpdateHeading" jhiTranslate="jhMonoApp.membership.home.createOrEditLabel">
+        Create or edit a Membership
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhMonoApp.membership.memberEmail" for="field_memberEmail">Member Email</label>
+          <input
+            type="text"
+            class="form-control"
+            name="memberEmail"
+            id="field_memberEmail"
+            data-cy="memberEmail"
+            formControlName="memberEmail"
+          />
+          <div *ngIf="editForm.get('memberEmail')!.invalid && (editForm.get('memberEmail')!.dirty || editForm.get('memberEmail')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('memberEmail')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhMonoApp.membership.organisationName" for="field_organisationName"
+            >Organisation Name</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="organisationName"
+            id="field_organisationName"
+            data-cy="organisationName"
+            formControlName="organisationName"
+          />
+          <div
+            *ngIf="
+              editForm.get('organisationName')!.invalid &&
+              (editForm.get('organisationName')!.dirty || editForm.get('organisationName')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('organisationName')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhMonoApp.membership.organization" for="field_organization">Organization</label>
+          <select class="form-control" id="field_organization" data-cy="organization" name="organization" formControlName="organization">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="
+                organizationOption.id === editForm.get('organization')!.value?.id ? editForm.get('organization')!.value : organizationOption
+              "
+              *ngFor="let organizationOption of organizationsSharedCollection; trackBy: trackOrganizationById"
+            >
+              {{ organizationOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" jhiTranslate="jhMonoApp.membership.member" for="field_member">Member</label>
+          <select class="form-control" id="field_member" data-cy="member" name="member" formControlName="member">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="memberOption.id === editForm.get('member')!.value?.id ? editForm.get('member')!.value : memberOption"
+              *ngFor="let memberOption of membersSharedCollection; trackBy: trackMemberById"
+            >
+              {{ memberOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

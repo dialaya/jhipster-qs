@@ -1,0 +1,48 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="membership">
+      <h2 data-cy="membershipDetailsHeading"><span jhiTranslate="jhMonoApp.membership.detail.title">Membership</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ membership.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhMonoApp.membership.memberEmail">Member Email</span></dt>
+        <dd>
+          <span>{{ membership.memberEmail }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhMonoApp.membership.organisationName">Organisation Name</span></dt>
+        <dd>
+          <span>{{ membership.organisationName }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhMonoApp.membership.organization">Organization</span></dt>
+        <dd>
+          <div *ngIf="membership.organization">
+            <a [routerLink]="['/organization', membership.organization?.id, 'view']">{{ membership.organization?.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="jhMonoApp.membership.member">Member</span></dt>
+        <dd>
+          <div *ngIf="membership.member">
+            <a [routerLink]="['/member', membership.member?.id, 'view']">{{ membership.member?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/membership', membership.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

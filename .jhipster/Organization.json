@@ -1,0 +1,52 @@
+{
+  "name": "Organization",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "baseRate",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "groupRate",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "fullRate",
+      "fieldType": "Long"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "location",
+      "otherEntityRelationshipName": "organization",
+      "relationshipName": "location",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "membership",
+      "otherEntityRelationshipName": "organization",
+      "relationshipName": "membership"
+    }
+  ],
+  "javadoc": "The organization entity.",
+  "entityTableName": "organization",
+  "dto": "no",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210526010406"
+}

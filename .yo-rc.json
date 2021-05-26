@@ -41,6 +41,8 @@
     "jwtSecretKey": "OTU5MWMxNjkxZjE3ZWFlMDRlZmQyOGI1YWFlOTMyYjhhNDNlZDJjOTQzMjQ1NTlkZGFlMGQxNWRmMmYxNGM5YjVkMDEyNWY3NzFlMGYwNmFkMzZlNzNkM2YyZGZjNjAzZTQ3ZDA5NDA2Y2JmOTI0MGVmYmQ2Zjk4YzMxNTA1YWQ=",
     "clientPackageManager": "npm",
     "clientThemeVariant": "",
-    "languages": ["fr", "en"]
+    "languages": ["fr", "en"],
+    "entities": ["Region", "Country", "Location", "Member", "Organization", "Membership", "Order", "Coupon"],
+    "lastLiquibaseTimestamp": 1621991049000
   }
 }

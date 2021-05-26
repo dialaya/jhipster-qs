@@ -1,0 +1,103 @@
+
+entity Region {
+	regionName String
+}
+
+entity Country {
+	countryName String
+}
+
+// an ignored comment
+/** not an ignored comment */
+entity Location {
+	streetAddress String,
+	postalCode String,
+	city String
+}
+
+/**
+ * The Member entity.
+ */
+entity Member {
+    title String,
+	firstName String,
+	lastName String,
+	email String required,
+	phoneNumber String required,
+	requestDate Instant
+}
+
+/**
+* The organization entity.
+*/
+entity Organization {
+	name String required,
+    description String,
+    baseRate Long,
+    groupRate Long,
+    fullRate Long
+}
+
+entity Membership {
+	memberEmail String required,
+	organisationName String required
+}
+
+entity Order {
+	orderId String required
+    
+}
+
+entity Coupon {
+   couponId String required,
+   offRate Long required,
+}
+
+relationship OneToOne {
+	Country{region} to Region
+}
+
+relationship OneToOne {
+	Location{country} to Country
+}
+
+relationship OneToOne {
+	Member{location} to Location
+}
+
+relationship OneToOne {
+	Organization{location} to Location
+}
+
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+	Member to Order{member},
+	/**
+	* A relationship
+	*/
+	Order to
+	/**
+	* Another side of the same relationship
+	*/
+	Coupon{order},
+    
+    Organization to Membership{organization},
+    Member to Membership{member}
+}
+
+relationship ManyToOne {
+	Member{legalRepresentative} to Member
+}
+
+// Set pagination options
+paginate Membership, Member with infinite-scroll
+paginate Order with pagination
+
+// Use Data Transfer Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl except Member, Order, Coupon
+
+// Set an angular suffix
+// angularSuffix * with mySuffix

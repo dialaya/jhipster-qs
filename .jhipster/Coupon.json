@@ -1,0 +1,34 @@
+{
+  "name": "Coupon",
+  "fields": [
+    {
+      "fieldName": "couponId",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "offRate",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "order",
+      "otherEntityRelationshipName": "coupon",
+      "javadoc": "Another side of the same relationship",
+      "relationshipName": "order"
+    }
+  ],
+  "entityTableName": "coupon",
+  "dto": "no",
+  "pagination": "no",
+  "service": "no",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210526010409"
+}
